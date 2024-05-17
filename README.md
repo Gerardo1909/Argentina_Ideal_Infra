@@ -1,28 +1,16 @@
 # Trabajo Práctico Final - Infraestructura para la Ciencia de Datos
 
-## Nuestra hipótesis
-Desde la gerencia de "Argentina ideal" están buscando estrategias de mercado para maximizar la venta de sus productos menos vendidos en un ciclo trimestral. Desde el departamento de Marketing proponen la hipótesis de que existe cierta correlación entre la estacionalidad y la baja venta de ciertos productos.
+## Enunciado 
 
-* Se sugiere que cada trimestre hay productos que consistentemente tienen menor demanda.
+La empresa de producción y venta de productos masivos llamada **“Argentina Ideal”**, organiza sus ventas en el territorio argentino con lo que en el mercado se denomina venta indirecta.
 
-* Además, se sugiere que según la región y las características demográficas, la cantidad de ventas de ciertos productos menos vendidos puede variar.
+En esta modalidad de venta la toma del pedido, el reparto y facturación se encuentra a cargo de empresas distribuidoras. De esta forma **“Argentina Ideal”** llega a los comercios minoristas (almacenes, supermercados, free-shops, etc.) mediante los distribuidores (compañía -> distribuidor/mayorista -> comercio minorista). Los productos que se fabrican se encuentran acopiados en los distintos almacenes del único centro logístico que tiene **“Argentina Ideal”** ubicado en Capital Federal.
 
-## Preguntas a responder
+Las ventas se encuentran organizadas en 4 regiones a lo largo de todo el país, CABA, Norte, Centro, y Sur. Un distribuidor podría vender y distribuir en más de una región, y podría tener más de una sucursal por región. La modalidad de venta es lo que se denomina **“pre-venta”**: un vendedor sale el día n a tomar los pedidos y los repartidores al día siguiente (n+1) se encargan de llevar la mercadería a los distintos comercios.
 
-* ¿Cuáles son los productos que tienen menor volumen de ventas cada trimestre?
+## ¿Cuál es nuestra meta como grupo?
 
-* ¿Durante qué trimestre tienen los productos el menor volumen de ventas por región?
+Nosotros nos encargaremos de crear la infraestructura necesaria para gestionar la información que **"Argentina Ideal"** recibe diariamente de los distribuidores. Esto nos permitirá responder preguntas de negocio, comprender sus necesidades y tomar acciones adecuadas.
 
-* Para los productos con menor volumen de ventas, ¿en qué tipo de establecimiento se suelen vender menos?
+Para lograrlo, utilizaremos **Google Cloud Platform (GCP)**, el lenguaje de programación **Python** y el lenguaje para la manipulación de bases de datos **SQL**. Seguiremos varias fases: desde la generación de la información de los distribuidores y su carga en GCP, hasta el modelado de un datawarehouse, la creación de datamarts específicos para distintas áreas del negocio y, finalmente, la visualización de la información relevante a través de dashboards.
 
-* ¿Qué factores podrían estar influyendo en las bajas ventas de estos productos en cada trimestre?
-
-## Plan de acción 
-
-* Utilizar la información almacenada en el datawarehouse de "Argentina ideal" y generar un datamart con la información que resulte relevante para el departamento de Marketing.
-
-* Realizar el análisis pertinente para lograr responder las preguntas planteadas, para este caso usando tableros y extrayendo información valiosa de los mismos.
-
-* Identificar patrones de ventas bajas y proponer estrategias para incrementar las ventas de estos productos, tales como promociones especiales, cambios en el packaging, campañas de marketing dirigidas, o la inclusión de estos productos en combos o paquetes atractivos.
-
-* Desarrollar y testar campañas de marketing específicas cada trimestre para los productos identificados con menores ventas, ajustando la estrategia según la región y características demográficas.
