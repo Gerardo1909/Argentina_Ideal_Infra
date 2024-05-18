@@ -1,5 +1,19 @@
 # Planteo del problema - departamento de Marketing
 
+## El código de este directorio
+
+En este directorio, podrán encontrar los scripts de Python que utilizamos para subir los datos crudos, generar el datawarehouse y construir datamarts para el manejo 
+de la información de **"Argentina Ideal"**. Para ejecutarlos y no obtener ningún error inesperado les hemos colocado un número al final de su nombre que indica el orden en que deben ser ejecutados los scripts. A continuación dejamos una explicación del propósito de cada archivo:
+
+```sh
+C:.
+├───modelado_informacion
+│       cargar_datos_crudos_1.py #Como su nombre indica, es el primero a ser ejecutado ya que carga los datos crudos desde el Storage
+│       crear_dimensiones_2.py #Una vez cargados los datos crudos, este archivo se encarga de generar los archivos de dimensiones del datawarehouse
+│       crear_fact_table_3.py #Este archivo se encarga de crear la tabla de hechos, es el último en ser ejecutado ya que se apoya de los archivos de dimensiones
+│       ..
+```
+
 ## Nuestra hipótesis
 
 Desde la gerencia de **"Argentina ideal"** están buscando estrategias de mercado para maximizar la venta de sus productos menos vendidos en un ciclo trimestral. Desde el departamento de Marketing proponen la hipótesis de que existe cierta correlación entre la estacionalidad y la baja venta de ciertos productos.
@@ -42,6 +56,6 @@ Desde nuestro grupo de trabajo, hemos decidido construir un datawarehouse que no
 
 * **Hechos "ventas"**: Contiene información sobre las ventas realizadas por día, a cada cliente individual, de un producto específico.
 
-En este directorio, podrán encontrar los scripts de Python que utilizamos para manipular la información, generar el datawarehouse y construir datamarts. A continuación, dejamos una imagen del modelo de datawarehouse que implementaremos:
+A continuación, dejamos una imagen del modelo de datawarehouse que hemos estado describiendo:
 
 ![Modelo Datawarehouse](./Modelo_dws_grupo8_infra.png)
