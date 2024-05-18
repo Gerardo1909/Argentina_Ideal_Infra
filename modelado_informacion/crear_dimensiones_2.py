@@ -1,41 +1,12 @@
 from google.cloud import bigquery
-
-def crear_tabla(client, ID_tabla_a_crear, query, metodo_escritura):
-    """
-    Esta función crea una nueva tabla en Google BigQuery utilizando una consulta SQL y la disposición de escritura dada.
-
-    Parameters:
-    client (bigquery.Client): El cliente de BigQuery.
-    ID_tabla_a_crear (str): El ID de la tabla que se va a crear en el formato 'proyecto.dataset.tabla'.
-    query (str): La consulta SQL que se va a ejecutar para llenar la tabla.
-    metodo_escritura (str): La disposición de escritura para la tabla. Puede ser uno de los siguientes:
-        - 'WRITE_TRUNCATE': Si la tabla existe sobre escribe los datos.
-        - 'WRITE_APPEND': Si la tabla existe agrega datos en la tabla.
-        - 'WRITE_EMPTY': Solo escribe datos cuando la tabla existe y no tiene datos.
-
-    Returns:
-    None. Si la ejecución de la consulta es exitosa, imprime el resultado. Si se produce un error, imprime el mensaje de error.
-    """
-
-    # Crea un objeto QueryJobConfig con la disposición de escritura especificada
-    job_config = bigquery.QueryJobConfig(
-        destination = ID_tabla_a_crear,
-        write_disposition = metodo_escritura
-    )
-
-    # Ejecuta la consulta de manera asíncrona
-    query_job = client.query(query, job_config=job_config)
-
-    # Espera a que finalice el trabajo de consulta y maneja cualquier excepción
-    try:
-        query_job.result()
-        print(f"Tabla {ID_tabla_a_crear} creada y datos insertados con éxito.")
-    except Exception as err:
-        print(f"Error al crear la tabla {ID_tabla_a_crear}: {err}")
+from utils.funciones_gcp import crear_tabla
+import os
 
 if __name__ == '__main__':
     ID_proyecto = "usm-infra-grupo8-401213"
     datawarehouse_nombre = "datawarehouse_argideal"
+    ruta_credenciales= os.path.join(os.getcwd(),"credenciales.json") #Necesario tener una clave propia!
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = ruta_credenciales
     client = bigquery.Client(project=ID_proyecto)
 
     #Queries para crear tablas temporales

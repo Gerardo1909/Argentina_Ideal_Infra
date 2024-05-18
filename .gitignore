@@ -1,4 +1,5 @@
-Generacion_datos/clave_bucket.json
+#Credenciales privadas
+credenciales.json
 
 # Entorno virtual
 arg_ideal_infra/
