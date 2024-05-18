@@ -1,1 +1,26 @@
 Generacion_datos/clave_bucket.json
+
+# Entorno virtual
+arg_ideal_infra/
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de configuración del entorno
+.env
+*.env
+
+# Archivos de configuración de editores y entornos de desarrollo
+.vscode/
+.idea/
+*.swp
+
+# Archivos de registro
+*.log
+
+# Archivos generados por distribuciones y empaquetado
+dist/
+build/
+*.egg-info/
