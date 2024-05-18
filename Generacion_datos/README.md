@@ -1,10 +1,24 @@
 # Generación de datos
 
+## El código de este directorio
+
+Los notebooks que se encuentran en este directorio son los encargados de generar la información que los distribuidores envían a **"Argentina Ideal"** diariamente.
+
+Podrán notar que hay más de un notebook y que cada uno tiene un **"VN"** al final de su nombre, donde **N** indica el número de versión del notebook, esto es debido a que este proceso ha sido iterativo y se ha ido mejorando el código según fuimos relevando requerimientos para la correcta generación de los datos. Aquí dejamos un vistazo de la estructura de este directorio:
+
+```sh
+C:.
+├───generacion_datos
+│       Generador_de_archivos_V0.ipynb #Nuestra primera iteración, se encargaba de generar los archivos de forma local
+│       Generador_de_archivos_V1.ipynb #El código que usamos actualmente para subir la información a Google Cloud Storage
+│       TP_Final_Especificacion_1.xlsx #Archivo excel con especificaciones de como se deben generar los campos de los archivos
+│       ..
+```
+
 ## Descipción de los archivos
 
 El sistema de los distribuidores cuenta con un componente de software que es capaz de generar, a partir de la información de su sistema de ventas, 
-los archivos en formato csv. Los notebooks que encontrarán en este directorio son los que generan dicha información y la suben a un bucket de 
-**Google Cloud Storage**, a continuación dejamos una descripción de cada archivo:
+los archivos en formato csv. A continuación dejamos una descripción de cada archivo:
 
 * **Venta:** Contiene la venta que los distribuidores ha realizado a los negocios minoristas en un día. En este archivo se debe considerar para un mismo cliente, misma fecha, mismo SKU (código de producto), la sumatoria de lo facturado considerando en el archivo una sola línea para cada combinación de Cliente/fecha/SKU.
 
