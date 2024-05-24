@@ -30,24 +30,7 @@ if __name__ == '__main__':
         FROM `{ID_proyecto}.datos_crudos.cliente` as cliente;
     """
 
-    generar_dim_cliente_temp = f"""
-        SELECT DISTINCT
-            cliente.codigo_sucursal,
-            cliente.codigo_cliente AS Codigo_cliente,
-            cliente.n_distribuidor,
-            cliente.nombre_cliente,
-            cliente.direccion,
-            cliente.razon_social,
-            cliente.cuit,
-            cliente.estado,
-            cliente.telefono,
-            cliente.fecha_alta,
-            cliente.fecha_baja,
-            cliente.tipo_negocio
-        FROM `{ID_proyecto}.datos_crudos.cliente` as cliente;
-    """
-
-    #Queries para crear tablas finales con IDs incrementales
+    #Queries para crear tablas finales con IDs subrogados
     generar_dim_fechas = f"""
         SELECT
             ROW_NUMBER() OVER() AS id_fecha,
@@ -77,28 +60,19 @@ if __name__ == '__main__':
         ORDER BY id_ubicacion;
     """
 
-    generar_dim_cliente = f"""
-        SELECT
-            ROW_NUMBER() OVER() AS id_cliente,
-            codigo_sucursal,
-            Codigo_cliente,
-            n_distribuidor,
-            nombre_cliente,
-            direccion,
-            razon_social,
-            cuit,
-            estado,
-            telefono,
-            fecha_alta,
-            fecha_baja,
-            tipo_negocio
-        FROM `{ID_proyecto}.{datawarehouse_nombre}.temp_cliente`
-        ORDER BY id_cliente;
+    generar_dim_cliente= f"""
+        SELECT DISTINCT
+            cliente.codigo_cliente,
+            cliente.codigo_sucursal,
+            cliente.n_distribuidor,
+            cliente.nombre_cliente,
+            cliente.tipo_negocio
+        FROM `{ID_proyecto}.datos_crudos.cliente` as cliente;
     """
 
     #Genero listas para asociar las tablas con las queriesque las generan
-    lista_tablas_temp = ['temp_fechas', 'temp_producto', 'temp_ubicacion', 'temp_cliente']
-    lista_querys_temp = [generar_dim_fechas_temp, generar_dim_producto_temp, generar_dim_ubicacion_temp, generar_dim_cliente_temp]
+    lista_tablas_temp = ['temp_fechas', 'temp_producto', 'temp_ubicacion']
+    lista_querys_temp = [generar_dim_fechas_temp, generar_dim_producto_temp, generar_dim_ubicacion_temp]
 
     lista_tablas_final = ['dim_fechas', 'dim_producto', 'dim_ubicacion', 'dim_cliente']
     lista_querys_final = [generar_dim_fechas, generar_dim_producto, generar_dim_ubicacion, generar_dim_cliente]
@@ -124,7 +98,10 @@ if __name__ == '__main__':
             metodo_escritura="WRITE_TRUNCATE"
         )
 
-        #Luego de crear la tabla, elimino la tabla temporal correspondiente
-        TEMP_TABLE_ID = f"{ID_proyecto}.{datawarehouse_nombre}.temp_{tabla.split('_')[1]}"
-        client.delete_table(TEMP_TABLE_ID, not_found_ok=True)
-        print(f"Tabla temporal {TEMP_TABLE_ID} eliminada.")  
+        #Cliente no tiene tabla temporal!
+        if tabla != "dim_cliente":
+        
+            #Luego de crear la tabla, elimino la tabla temporal correspondiente
+            TEMP_TABLE_ID = f"{ID_proyecto}.{datawarehouse_nombre}.temp_{tabla.split('_')[1]}"
+            client.delete_table(TEMP_TABLE_ID, not_found_ok=True)
+            print(f"Tabla temporal {TEMP_TABLE_ID} eliminada.")  

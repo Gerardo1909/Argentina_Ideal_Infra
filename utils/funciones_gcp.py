@@ -33,7 +33,7 @@ def crear_tabla(client, ID_tabla_a_crear, query, metodo_escritura):
     except Exception as err:
         print(f"Error al crear la tabla {ID_tabla_a_crear}: {err}")
         
-def cargar_datos_de_gcs_a_bigquery(GCS_URI, ID_tabla, esquema_tabla):
+def cargar_datos_de_gcs_a_bigquery(client,GCS_URI, ID_tabla, esquema_tabla):
     """
     Esta función carga datos de un bucket de Google Cloud Storage (GCS) a una tabla específica de BigQuery.
 

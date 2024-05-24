@@ -58,9 +58,6 @@ esquema_tabla_cliente = [
     bigquery.SchemaField("n_distribuidor", "INTEGER"),
 ]
 
-#Hago la conexión con el cliente, importante pasarle el ID del proyecto como argumento
-client = bigquery.Client("usm-infra-grupo8-401213")
-
 if __name__ == '__main__':
     ID_proyecto = "usm-infra-grupo8-401213"
     ruta_credenciales= os.path.join(os.getcwd(),"credenciales.json") #Necesario tener una clave propia!
@@ -81,7 +78,7 @@ if __name__ == '__main__':
                 for table in lista_tablas:
                     ID_tabla = f"{ID_proyecto}.datos_crudos.{table}"
                     GCS_URI = f"{ruta_base}/distribuidor_{distribuidor}/{table}/{fecha_cierre_str}.csv"
-                    cargar_datos_de_gcs_a_bigquery(GCS_URI, ID_tabla, locals()[f"esquema_tabla_{table}"])
+                    cargar_datos_de_gcs_a_bigquery(client,GCS_URI, ID_tabla, locals()[f"esquema_tabla_{table}"])
             except BadRequest as err:
                 print(err)
             except NotFound as err:

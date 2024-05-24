@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
     generar_fact_ventas= f"""
     SELECT
-        dim_cliente.id_cliente,
+        dim_cliente.codigo_cliente,
         dim_fechas.id_fecha,
         dim_producto.id_producto,
         dim_ubicacion.id_ubicacion,
@@ -41,7 +41,7 @@ if __name__ == '__main__':
     JOIN `{ID_proyecto}.{datawarehouse_nombre}.dim_fechas` AS dim_fechas
         ON fact_ventas_temp.fecha_cierre_comercial = dim_fechas.fecha_cierre_comercial
     JOIN `{ID_proyecto}.{datawarehouse_nombre}.dim_cliente` AS dim_cliente
-        ON fact_ventas_temp.codigo_sucursal = dim_cliente.codigo_sucursal AND fact_ventas_temp.codigo_cliente = dim_cliente.Codigo_cliente
+        ON fact_ventas_temp.codigo_cliente = dim_cliente.codigo_cliente
     """
 
     #Creo la tabla temporal de la cual se apoyará la tabla de hechos de ventas
