@@ -2,15 +2,15 @@
 
 ## El código de este directorio
 
-En este directorio, podrán encontrar los scripts de Python que utilizamos para subir los datos crudos, generar el datawarehouse y construir datamarts para el manejo 
-de la información de **"Argentina Ideal"**. Para ejecutarlos y no obtener ningún error inesperado les hemos colocado un número al final de su nombre que indica el orden en que deben ser ejecutados los scripts. A continuación dejamos una explicación del propósito de cada archivo:
+En este directorio, podrán encontrar los scripts de Python y SQL que utilizamos para subir los datos crudos, generar el datawarehouse y construir el datamart para el manejo de la información de **"Argentina Ideal"**. Para ejecutarlos y no obtener ningún error inesperado les hemos colocado un número al final de su nombre que indica el orden en que deben ser ejecutados los scripts. A continuación dejamos una explicación del propósito de cada archivo:
 
 ```sh
 C:.
 ├───modelado_informacion
 │       cargar_datos_crudos_1.py #Como su nombre indica, es el primero a ser ejecutado ya que carga los datos crudos desde el Storage
 │       crear_dimensiones_2.py #Una vez cargados los datos crudos, este archivo se encarga de generar los archivos de dimensiones del datawarehouse
-│       crear_fact_table_3.py #Este archivo se encarga de crear la tabla de hechos, es el último en ser ejecutado ya que se apoya de los archivos de dimensiones
+│       crear_fact_table_3.py #Este archivo se encarga de crear la tabla de hechos, su creación se apoya de los archivos de dimensiones
+│       crear_datamart_4.py #Este archivo se encarga de generar el datamart del departamento de marketing, se ejecuta desde GCP
 │       ..
 ```
 
@@ -26,9 +26,11 @@ Desde la gerencia de **"Argentina ideal"** están buscando estrategias de mercad
 
 * ¿Cuáles son los productos que tienen menor volumen de ventas cada trimestre?
 
-* ¿Durante qué trimestre tienen los productos el menor volumen de ventas por región?
+* ¿Durante qué trimestre tienen los productos el menor volumen de ventas por región?, ¿se mantiene entre trimestres?
 
-* Para los productos con menor volumen de ventas, ¿en qué tipo de establecimiento se suelen vender menos?
+* Para los productos con menor volumen de ventas, ¿en qué tipo de establecimiento se suelen vender más?
+
+* ¿Que distribuidores suelen vender más estos productos?
 
 * ¿Qué factores podrían estar influyendo en las bajas ventas de estos productos en cada trimestre?
 
