@@ -26,7 +26,7 @@ Desde la gerencia de **"Argentina ideal"** están buscando estrategias de mercad
 
 * ¿Cuáles son los productos que tienen menor volumen de ventas cada trimestre?
 
-* ¿Durante qué trimestre tienen los productos el menor volumen de ventas por región?, ¿se mantiene entre trimestres?
+* ¿Durante qué trimestre tienen los productos el menor volumen de ventas por provincia?, ¿se mantiene entre trimestres?
 
 * Para los productos con menor volumen de ventas, ¿en qué tipo de establecimiento se suelen vender más?
 
