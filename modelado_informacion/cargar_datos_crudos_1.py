@@ -63,8 +63,8 @@ if __name__ == '__main__':
     ruta_credenciales= os.path.join(os.getcwd(),"credenciales.json") #Necesario tener una clave propia!
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = ruta_credenciales
     client = bigquery.Client(project=ID_proyecto)
-    cant_dist = 4 # Aquí la cantidad siempre debe ser una más que la real
-    cant_dias = 2
+    cant_dist = 6 # Aquí la cantidad siempre debe ser una más que la real
+    cant_dias = 365
     ruta_base = "gs://datos_argideal_grupo8"
     lista_tablas = ['stock', 'venta', 'deuda', 'cliente']
     fecha_actual = datetime.now()
