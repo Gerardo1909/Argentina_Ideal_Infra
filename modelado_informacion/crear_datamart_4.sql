@@ -1,7 +1,7 @@
 CREATE TABLE datamart_marketing.volumen_ventas AS
 SELECT
-  dim_fechas.mes,
-  dim_fechas.trimestre,
+  EXTRACT(MONTH FROM ventas.fecha_cierre_comercial) AS mes,
+  EXTRACT(QUARTER FROM ventas.fecha_cierre_comercial) AS trimestre,
   dim_cliente.n_distribuidor,
   dim_cliente.tipo_negocio,
   dim_ubicacion.Provincia,
@@ -11,10 +11,6 @@ SELECT
   ventas.venta_importe
 FROM
   datawarehouse_argideal.fact_ventas ventas
-JOIN
-  `datawarehouse_argideal.dim_fechas` dim_fechas
-    ON
-      ventas.id_fecha = dim_fechas.id_fecha
 JOIN
   `datawarehouse_argideal.dim_producto` dim_producto
     ON

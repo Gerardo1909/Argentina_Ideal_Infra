@@ -10,12 +10,6 @@ if __name__ == '__main__':
     client = bigquery.Client(project=ID_proyecto)
 
     #Queries para crear tablas temporales
-    generar_dim_fechas_temp = f"""
-        SELECT DISTINCT
-            stock.fecha_cierre_comercial AS fecha_cierre_comercial
-        FROM `{ID_proyecto}.datos_crudos.stock` as stock;
-    """
-
     generar_dim_producto_temp = f"""
         SELECT DISTINCT
             stock.SKU_codigo AS sku_codigo,
@@ -31,17 +25,6 @@ if __name__ == '__main__':
     """
 
     #Queries para crear tablas finales con IDs subrogados
-    generar_dim_fechas = f"""
-        SELECT
-            ROW_NUMBER() OVER() AS id_fecha,
-            fecha_cierre_comercial,
-            EXTRACT(DAY FROM fecha_cierre_comercial) AS dia,
-            EXTRACT(MONTH FROM fecha_cierre_comercial) AS mes,
-            EXTRACT(QUARTER FROM fecha_cierre_comercial) AS trimestre
-        FROM `{ID_proyecto}.{datawarehouse_nombre}.temp_fechas`
-        ORDER BY id_fecha;
-    """
-
     generar_dim_producto = f"""
         SELECT
             ROW_NUMBER() OVER() AS id_producto,
@@ -60,6 +43,7 @@ if __name__ == '__main__':
         ORDER BY id_ubicacion;
     """
 
+    #Queries para crear tablas finales con sus IDs originales
     generar_dim_cliente= f"""
         SELECT DISTINCT
             cliente.codigo_cliente,
@@ -68,14 +52,15 @@ if __name__ == '__main__':
             cliente.nombre_cliente,
             cliente.tipo_negocio
         FROM `{ID_proyecto}.datos_crudos.cliente` as cliente;
+        ORDER BY cliente.codigo_cliente;
     """
 
     #Genero listas para asociar las tablas con las queriesque las generan
-    lista_tablas_temp = ['temp_fechas', 'temp_producto', 'temp_ubicacion']
-    lista_querys_temp = [generar_dim_fechas_temp, generar_dim_producto_temp, generar_dim_ubicacion_temp]
+    lista_tablas_temp = ['temp_producto', 'temp_ubicacion']
+    lista_querys_temp = [generar_dim_producto_temp, generar_dim_ubicacion_temp]
 
-    lista_tablas_final = ['dim_fechas', 'dim_producto', 'dim_ubicacion', 'dim_cliente']
-    lista_querys_final = [generar_dim_fechas, generar_dim_producto, generar_dim_ubicacion, generar_dim_cliente]
+    lista_tablas_final = ['dim_producto', 'dim_ubicacion', 'dim_cliente']
+    lista_querys_final = [generar_dim_producto, generar_dim_ubicacion, generar_dim_cliente]
 
     #Primero genero las tablas temporales
     for tabla, query in zip(lista_tablas_temp, lista_querys_temp):

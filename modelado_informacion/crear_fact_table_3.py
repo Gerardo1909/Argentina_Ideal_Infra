@@ -9,7 +9,7 @@ if __name__ == '__main__':
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = ruta_credenciales
     client = bigquery.Client(project=ID_proyecto)
     
-    #Primero hago la query para juntar la tabla de ventas con la ubicación
+    #Query para generar la tabla de hechos temporal
     generar_fact_ventas_temp = f"""
     SELECT
         tabla_cliente.ciudad,
@@ -25,12 +25,13 @@ if __name__ == '__main__':
         ON tabla_venta.codigo_sucursal = tabla_cliente.codigo_sucursal AND tabla_venta.codigo_cliente = tabla_cliente.codigo_cliente
     """
 
+    #Query para generar la tabla de hechos definitiva
     generar_fact_ventas= f"""
     SELECT
         dim_cliente.codigo_cliente,
-        dim_fechas.id_fecha,
         dim_producto.id_producto,
         dim_ubicacion.id_ubicacion,
+        fact_ventas_temp.fecha_cierre_comercial,
         fact_ventas_temp.venta_unidades,
         fact_ventas_temp.venta_importe
     FROM `{ID_proyecto}.{datawarehouse_nombre}.fact_ventas_temp` AS fact_ventas_temp
@@ -38,8 +39,6 @@ if __name__ == '__main__':
         ON fact_ventas_temp.ciudad = dim_ubicacion.Ciudad AND fact_ventas_temp.provincia = dim_ubicacion.Provincia
     JOIN `{ID_proyecto}.{datawarehouse_nombre}.dim_producto` AS dim_producto
         ON fact_ventas_temp.SKU_codigo = dim_producto.Codigo_SKU 
-    JOIN `{ID_proyecto}.{datawarehouse_nombre}.dim_fechas` AS dim_fechas
-        ON fact_ventas_temp.fecha_cierre_comercial = dim_fechas.fecha_cierre_comercial
     JOIN `{ID_proyecto}.{datawarehouse_nombre}.dim_cliente` AS dim_cliente
         ON fact_ventas_temp.codigo_cliente = dim_cliente.codigo_cliente
     """
