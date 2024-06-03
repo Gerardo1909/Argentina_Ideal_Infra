@@ -20,7 +20,7 @@ Desde la gerencia de **Argentina ideal** se ha identificado que en el último a�
 
 Después de una exhaustiva reunión con todos los departamentos, se ha encomendado al departamento de Marketing la tarea de idear nuevas estrategias de ventas con el objetivo de maximizar la venta de estos productos y mantener la competitividad de Argentina Ideal en el mercado.
 
-# Hipótesis desde el departamento de Marketing
+## Hipótesis desde el departamento de Marketing
 
 El departamento de Marketing ha propuesto la hipótesis de que existe una correlación entre la estacionalidad y la baja venta de ciertos productos. Se sugiere que cada trimestre hay productos que consistentemente tienen una menor demanda. Además, se plantea que la cantidad de ventas de estos productos menos vendidos puede variar según la región y las características demográficas.
 

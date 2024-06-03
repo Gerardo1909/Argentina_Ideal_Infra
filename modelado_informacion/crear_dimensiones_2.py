@@ -51,7 +51,7 @@ if __name__ == '__main__':
             cliente.n_distribuidor,
             cliente.nombre_cliente,
             cliente.tipo_negocio
-        FROM `{ID_proyecto}.datos_crudos.cliente` as cliente;
+        FROM `{ID_proyecto}.datos_crudos.cliente` as cliente
         ORDER BY cliente.codigo_cliente;
     """
 
