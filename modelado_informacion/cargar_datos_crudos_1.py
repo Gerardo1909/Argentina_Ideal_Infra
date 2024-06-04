@@ -64,7 +64,7 @@ if __name__ == '__main__':
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = ruta_credenciales
     client = bigquery.Client(project=ID_proyecto)
     cant_dist = 6 # Aquí la cantidad siempre debe ser una más que la real
-    cant_dias = 10
+    cant_dias = 339
     ruta_base = "gs://datos_argideal_grupo8"
     lista_tablas = ['stock', 'venta', 'deuda', 'cliente']
     fecha_actual = datetime.now()
